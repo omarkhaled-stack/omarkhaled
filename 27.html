@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>NEXUS | المبدعون وراء النجاح</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ------------------------------
+           1. RESET & GLOBAL VARIABLES
+        ------------------------------- */
+        :root {
+            --bg-dark: #0c0c1d;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --primary: #6a5acd;
+            --primary-hover: #584bc1;
+            --text-white: #ffffff;
+            --text-muted: #a1a1b5;
+            --border-glow: rgba(106, 90, 205, 0.3);
+            --radius-card: 20px;
+            --transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.5;
+            background-image: radial-gradient(circle at 10% 20%, rgba(106, 90, 205, 0.12) 0%, transparent 55%);
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* ------------------------------
+           2. NAVBAR (ستيكي + تأثير زجاجي)
+        ------------------------------- */
+        .navbar {
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            background: rgba(12, 12, 29, 0.96);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .logo i {
+            color: var(--primary);
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #fff;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            right: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary);
+            transform: rotate(15deg);
+        }
+
+        .contact-btn {
+            background: var(--primary);
+            color: #fff;
+            padding: 9px 24px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .contact-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(106, 90, 205, 0.3);
+        }
+
+        /* ------------------------------
+           3. HERO SECTION
+        ------------------------------- */
+        .hero-section {
+            text-align: center;
+            padding: 100px 20px 70px;
+            position: relative;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 13px;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .main-title {
+            font-size: 3.4rem;
+            margin-bottom: 18px;
+            background: linear-gradient(135deg, #ffffff 0%, #bfb5ff 85%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .header-description {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 620px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        .hero-btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: 700;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(106, 90, 205, 0.3);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #fff;
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: var(--transition);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            background: rgba(106, 90, 205, 0.12);
+            transform: translateY(-2px);
+        }
+
+        /* ------------------------------
+           4. SECTION GLOBAL
+        ------------------------------- */
+        section {
+            padding: 80px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        .section-title h2 span {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* ------------------------------
+           5. ABOUT SECTION (نص نظيف)
+        ------------------------------- */
+        .about-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            line-height: 1.9;
+            font-size: 1.05rem;
+            background: var(--card-bg);
+            padding: 28px 32px;
+            border-radius: var(--radius-card);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        /* ------------------------------
+           6. SERVICES GRID
+        ------------------------------- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            padding: 42px 28px;
+            border-radius: var(--radius-card);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 22px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ------------------------------
+           7. TEAM SECTION (بطاقات احترافية)
+        ------------------------------- */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 32px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            transition: var(--transition);
+            text-align: center;
+            padding: 20px 20px 24px;
+        }
+
+        .team-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-glow);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-image-wrapper {
+            width: 130px;
+            height: 130px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: linear-gradient(145deg, #1e1e34, #141428);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(106, 90, 205, 0.4);
+        }
+
+        .placeholder-img {
+            font-size: 58px;
+            line-height: 1;
+            color: #bfb5ff;
+        }
+
+        .team-info h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .role-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 10px 0 12px;
+        }
+
+        .role-icon {
+            background: rgba(106, 90, 205, 0.2);
+            padding: 5px;
+            border-radius: 8px;
+            font-size: 12px;
+            color: var(--primary);
+        }
+
+        .role-text {
+            font-size: 0.85rem;
+            color: #ddd;
+            font-weight: 500;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 16px;
+        }
+
+        .social-icons a {
+            color: var(--text-muted);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            color: var(--primary);
+            transform: scale(1.15);
+        }
+
+        /* ------------------------------
+           8. CONTACT SECTION (بدون إحصائيات)
+        ------------------------------- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 55px;
+            max-width: 1150px;
+            margin: 0 auto;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .contact-details div {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .contact-details i {
+            width: 44px;
+            height: 44px;
+            background: rgba(106, 90, 205, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-family: 'Cairo', sans-serif;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(106, 90, 205, 0.1);
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            border: none;
+            border-radius: 40px;
+            color: #fff;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .contact-form button:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* ------------------------------
+           9. FOOTER (نظيف)
+        ------------------------------- */
+        footer {
+            background: #08081a;
+            padding: 55px 5% 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 45px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-col ul li a:hover {
+            color: #fff;
+            transform: translateX(4px);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 25px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* ------------------------------
+           10. RESPONSIVE (موبايل/تابلت)
+        ------------------------------- */
+        @media (max-width: 850px) {
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 16px;
+            }
+
+            .nav-links {
+                gap: 18px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .main-title {
+                font-size: 2.2rem;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 20px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .services-grid {
+                gap: 20px;
+            }
+
+            .hero-section {
+                padding: 70px 16px 50px;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.9rem;
+            }
+
+            .btn-primary,
+            .btn-outline {
+                padding: 10px 22px;
+                font-size: 14px;
+            }
+
+            .team-card {
+                padding: 16px;
+            }
+
+            .card-image-wrapper {
+                width: 100px;
+                height: 100px;
+            }
+
+            .placeholder-img {
+                font-size: 42px;
+            }
+        }
+
+        /* إزالة أي خلفيات غير مرغوبة */
+        .stats-section {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-cube"></i> NEXUS
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" class="active">الرئيسية</a></li>
+            <li><a href="#about">من نحن</a></li>
+            <li><a href="#services">خدماتنا</a></li>
+            <li><a href="#team">فريقنا</a></li>
+            <li><a href="#contact">تواصل معنا</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="theme-toggle" id="darkModeToggle" aria-label="تبديل الوضع الليلي">
+                <i class="fas fa-moon"></i>
+            </div>
+            <a href="#contact" class="contact-btn">تواصل معنا <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="home">
+        <div class="subtitle">✦ فريق استثنائي ✦</div>
+        <h1 class="main-title">المبدعون وراء النجاح</h1>
+        <p class="header-description">
+            مجموعة من الأشخاص الشغوفين بصناعة تجارب رقمية مميزة وتحقيق تأثير حقيقي في عالم التقنية والأعمال.
+        </p>
+        <div class="hero-btn-group">
+            <a href="#services" class="btn-primary">استكشف خدماتنا</a>
+            <a href="#contact" class="btn-outline">تواصل معنا</a>
+        </div>
+    </section>
+
+    <!-- ABOUT (من نحن) -->
+    <section id="about">
+        <div class="section-title">
+            <h2>من <span>نحن</span></h2>
+            <p>فريق يجمع بين الإبداع والتقنية لصنع مستقبل رقمي واعد</p>
+        </div>
+        <div class="about-text">
+            <p>تأسست شركة NEXUS عام 2018 بهدف تقديم حلول تقنية مبتكرة تساعد الشركات على النمو والتوسع. نؤمن بأن التكنولوجيا هي محور التغيير، ونعمل بجد لنكون جزءاً من نجاح عملائنا. نمزج بين الخبرة التقنية والرؤية الإبداعية لنقدم منتجات تتجاوز التوقعات.</p>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services">
+        <div class="section-title">
+            <h2>خدمات<span>نا</span></h2>
+            <p>حلول رقمية متكاملة لعصر التحول الرقمي</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-laptop-code"></i>
+                <h3>تطوير المواقع</h3>
+                <p>نقوم ببناء مواقع ويب احترافية ومتجاوبة مع كافة الأجهزة، مصممة لتعكس هوية علامتك التجارية.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>تطوير التطبيقات</h3>
+                <p>تطبيقات جوال مبتكرة وسريعة لأنظمة iOS و Android، مصممة لتقديم تجربة مستخدم فائقة.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-paint-brush"></i>
+                <h3>تصميم UX/UI</h3>
+                <p>تصميم واجهات مستخدم جذابة وسهلة الاستخدام، تركز على رحلة المستخدم وتحسين التحويلات.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM SECTION (أعضاء الفريق فقط) -->
+    <section id="team">
+        <div class="section-title">
+            <h2>فريق <span>العمل</span></h2>
+            <p>المواهب التي تشعل شرارة الإبداع</p>
+        </div>
+        <div class="team-grid">
+            <!-- زيد الرقاعي -->
+            <div class="team-card">
+                <div class="card-image-wrapper">
+                    <div class="placeholder-img">👨‍💻</div>
+                </div>
+                <div class="team-info">
+                    <h3>زيد الرقاعي</h3>
+                    <div class="role-wrapper">
+                        <span class="role-icon"><i class="fas fa-code"></i></span>
+                        <span class="role-text">مطور ويب</span>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- سارة حسني -->
+            <div class="team-card">
+                <div class="card-image-wrapper">
+                    <div class="placeholder-img">🎨</div>
+                </div>
+                <div class="team-info">
+                    <h3>سارة حسني</h3>
+                    <div class="role-wrapper">
+                        <span class="role-icon"><i class="fas fa-paint-brush"></i></span>
+                        <span class="role-text">مصممة UI/UX</span>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-dribbble"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- محمد سامي -->
+            <div class="team-card">
+                <div class="card-image-wrapper">
+                    <div class="placeholder-img">👨‍💼</div>
+                </div>
+                <div class="team-info">
+                    <h3>محمد سامي</h3>
+                    <div class="role-wrapper">
+                        <span class="role-icon"><i class="fas fa-cloud"></i></span>
+                        <span class="role-text">مطور واجهات</span>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- نوران خالد -->
+            <div class="team-card">
+                <div class="card-image-wrapper">
+                    <div class="placeholder-img">📱</div>
+                </div>
+                <div class="team-info">
+                    <h3>نوران خالد</h3>
+                    <div class="role-wrapper">
+                        <span class="role-icon"><i class="fas fa-bullhorn"></i></span>
+                        <span class="role-text">مسؤولة تسويق</span>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- يوسف بدر -->
+            <div class="team-card">
+                <div class="card-image-wrapper">
+                    <div class="placeholder-img">🎥</div>
+                </div>
+                <div class="team-info">
+                    <h3>يوسف بدر</h3>
+                    <div class="role-wrapper">
+                        <span class="role-icon"><i class="fas fa-pen-fancy"></i></span>
+                        <span class="role-text">صانع محتوى</span>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION (تم حذف قسم الإحصائيات بالكامل) -->
+    <section id="contact">
+        <div class="section-title">
+            <h2>تواصل <span>معنا</span></h2>
+            <p>نحن هنا للإجابة على استفساراتكم وتحويل أفكاركم إلى واقع</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>ابقَ على تواصل</h3>
+                <p>فريق NEXUS على بعد رسالة. تواصل معنا لمناقشة مشروعك القادم.</p>
+                <div class="contact-details">
+                    <div><i class="fas fa-map-marker-alt"></i><span>القاهرة، مصر</span></div>
+                    <div><i class="fas fa-phone-alt"></i><span>+20 123 456 7890</span></div>
+                    <div><i class="fas fa-envelope"></i><span>info@nexus.com</span></div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form action="mailto:info@nexus.com" method="post" enctype="text/plain">
+                    <input type="text" placeholder="الاسم الكامل" required>
+                    <input type="email" placeholder="البريد الإلكتروني" required>
+                    <input type="text" placeholder="عنوان الرسالة">
+                    <textarea rows="5" placeholder="رسالتك..." required></textarea>
+                    <button type="submit">إرسال الرسالة <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 12px;">
+                    <i class="fas fa-cube"></i> NEXUS
+                </div>
+                <p style="color: var(--text-muted); line-height: 1.6;">حلول رقمية مبتكرة تمنحك قفزة نوعية في عالم التقنية.</p>
+            </div>
+            <div class="footer-col">
+                <h4>روابط سريعة</h4>
+                <ul>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#about">من نحن</a></li>
+                    <li><a href="#services">خدماتنا</a></li>
+                    <li><a href="#team">فريقنا</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>خدماتنا</h4>
+                <ul>
+                    <li><a href="#services">تطوير ويب</a></li>
+                    <li><a href="#services">تطوير تطبيقات</a></li>
+                    <li><a href="#services">تصميم UX/UI</a></li>
+                    <li><a href="#services">استشارات تقنية</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>تابعنا</h4>
+                <ul>
+                    <li><a href="#" target="_blank"><i class="fab fa-facebook"></i> فيسبوك</a></li>
+                    <li><a href="#" target="_blank"><i class="fab fa-twitter"></i> تويتر</a></li>
+                    <li><a href="#" target="_blank"><i class="fab fa-instagram"></i> انستغرام</a></li>
+                    <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i> لينكد إن</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 NEXUS. جميع الحقوق محفوظة.
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT: تنقل سلس + تفعيل الوضع النشط + وضع الليلي (اختياري إضافي) -->
+    <script>
+        // 1) تفعيل التمرير الناعم للروابط
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === "#" || targetId === "") return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 2) تفعيل الرابط النشط عند التمرير (تحديث active link)
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-links li a");
+
+        function updateActiveLink() {
+            let currentSectionId = "";
+            const scrollPosition = window.scrollY + 120; // عتبة مناسبة
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    currentSectionId = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                const href = link.getAttribute("href").substring(1); // إزالة #
+                if (href === currentSectionId) {
+                    link.classList.add("active");
+                }
+            });
+        }
+
+        window.addEventListener("scroll", updateActiveLink);
+        window.addEventListener("load", updateActiveLink);
+
+        // 3) تبديل الوضع الليلي / الفاتح (بسيط لتجربة محسنة)
+        const toggleBtn = document.getElementById("darkModeToggle");
+        let isDark = true;
+        toggleBtn.addEventListener("click", () => {
+            const root = document.documentElement.style;
+            if (isDark) {
+                document.documentElement.style.setProperty('--bg-dark', '#f5f3ff');
+                document.documentElement.style.setProperty('--card-bg', 'rgba(0,0,0,0.02)');
+                document.documentElement.style.setProperty('--text-white', '#111827');
+                document.documentElement.style.setProperty('--text-muted', '#4b5563');
+                document.body.style.backgroundColor = '#f9fafb';
+                document.body.style.backgroundImage = 'none';
+                toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                isDark = false;
+            } else {
+                document.documentElement.style.setProperty('--bg-dark', '#0c0c1d');
+                document.documentElement.style.setProperty('--card-bg', 'rgba(255, 255, 255, 0.03)');
+                document.documentElement.style.setProperty('--text-white', '#ffffff');
+                document.documentElement.style.setProperty('--text-muted', '#a1a1b5');
+                document.body.style.backgroundColor = '';
+                document.body.style.backgroundImage = '';
+                toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+                isDark = true;
+            }
+        });
+    </script>
+</body>
+</html>
